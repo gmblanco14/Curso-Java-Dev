@@ -1,34 +1,50 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.mycompany.ejercicio1poo;
 
-import java.util.ArrayList;
+/**
+ *
+ * @author MANUEL
+ */
+import java.util.*;
 
-public class Banco implements ServicioClientes, ServicioCuentas {
+public class Banco {
+
     private String nombre;
     private Domicilio domicilio;
     private String telefono;
-    private ArrayList<Cliente> clientes;
-    private ArrayList<Cuenta> cuentas; 
+    private SortedSet<Cliente> clientes;
+    private SortedSet<Cuenta> cuentas;
 
-    public Banco(String nombre, Domicilio domicilio, String telefono, ArrayList<Cliente> clientes) {
+    public Banco(String nombre, Domicilio domicilio, String telefono, SortedSet<Cliente> clientes) {
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.clientes = clientes;
-        this.cuentas = new ArrayList<>();
+        this.cuentas = new TreeSet<>();  // Inicializar el conjunto de cuentas
     }
 
-    // Implementación de métodos de ServicioClientes
-    @Override
-    public void agregarCliente(Cliente cliente) {
-        clientes.add(cliente);
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public Domicilio getDomicilio() { return domicilio; }
+    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public SortedSet<Cliente> getClientes() { return clientes; }
+    public void setClientes(SortedSet<Cliente> clientes) { this.clientes = clientes; }
+    public SortedSet<Cuenta> getCuentas() { return cuentas; }  // Método getter para cuentas
+    public void setCuentas(SortedSet<Cuenta> cuentas) { this.cuentas = cuentas; }
+
+    public void abrirCuenta(Cuenta cuenta) {
+        cuentas.add(cuenta);
     }
 
-    @Override
-    public void eliminarCliente(int numeroCliente) {
-        clientes.removeIf(cliente -> cliente.getNumero() == numeroCliente);
+    public void cerrarCuenta(int numeroCuenta) {
+        cuentas.removeIf(cuenta -> cuenta.getNumero() == numeroCuenta);
     }
 
-    @Override
     public Cliente obtenerCliente(int numeroCliente) {
         return clientes.stream()
                 .filter(cliente -> cliente.getNumero() == numeroCliente)
@@ -36,18 +52,6 @@ public class Banco implements ServicioClientes, ServicioCuentas {
                 .orElse(null);
     }
 
-    // Implementación de métodos de ServicioCuentas
-    @Override
-    public void abrirCuenta(Cuenta cuenta) {
-        cuentas.add(cuenta);
-    }
-
-    @Override
-    public void cerrarCuenta(int numeroCuenta) {
-        cuentas.removeIf(cuenta -> cuenta.getNumero() == numeroCuenta);
-    }
-
-    @Override
     public Cuenta obtenerCuenta(int numeroCuenta) {
         return cuentas.stream()
                 .filter(cuenta -> cuenta.getNumero() == numeroCuenta)
@@ -55,22 +59,14 @@ public class Banco implements ServicioClientes, ServicioCuentas {
                 .orElse(null);
     }
 
-    // Otros métodos de Banco
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public Domicilio getDomicilio() { return domicilio; }
-    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
-    public String getTelefono() { return telefono; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
-    public ArrayList<Cliente> getClientes() { return clientes; }
-    public void setClientes(ArrayList<Cliente> clientes) { this.clientes = clientes; }
     @Override
     public String toString() {
         return "Banco{" +
                 "nombre='" + nombre + '\'' +
-                ", domicilio=" + domicilio  +
+                ", domicilio=" + domicilio +
                 ", telefono='" + telefono + '\'' +
                 ", clientes=" + clientes +
+                ", cuentas=" + cuentas +
                 '}';
     }
 }

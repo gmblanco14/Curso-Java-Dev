@@ -8,8 +8,7 @@ package com.mycompany.ejercicio1poo;
  *
  * @author MANUEL
  */
-
-public class Cuenta {
+public class Cuenta implements Comparable<Cuenta> {
 
     private int numero;
     private String fechaApertura;
@@ -21,36 +20,18 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public int getNumero() {
-        return numero;
-    }
+    public int getNumero() { return numero; }
+    public void setNumero(int numero) { this.numero = numero; }
+    public String getFechaApertura() { return fechaApertura; }
+    public void setFechaApertura(String fechaApertura) { this.fechaApertura = fechaApertura; }
+    public double getSaldo() { return saldo; }  // Método getter de saldo
+    public void setSaldo(double saldo) { this.saldo = saldo; }
+    public String getFechaCancelacion() { return fechaCancelacion; }
+    public void setFechaCancelacion(String fechaCancelacion) { this.fechaCancelacion = fechaCancelacion; }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getFechaApertura() {
-        return fechaApertura;
-    }
-
-    public void setFechaApertura(String fechaApertura) {
-        this.fechaApertura = fechaApertura;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public String getFechaCancelacion() {
-        return fechaCancelacion;
-    }
-
-    public void setFechaCancelacion(String fechaCancelacion) {
-        this.fechaCancelacion = fechaCancelacion;
+    @Override
+    public int compareTo(Cuenta otraCuenta) {
+        return Double.compare(this.saldo, otraCuenta.saldo);
     }
 
     @Override
@@ -63,3 +44,4 @@ public class Cuenta {
                 '}';
     }
 }
+
