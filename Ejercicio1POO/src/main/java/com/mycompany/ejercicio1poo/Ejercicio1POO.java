@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.ejercicio1poo;
 
-/**
- *
- * @author MANUEL
- */
 import java.util.ArrayList;
 
 public class Ejercicio1POO {
@@ -23,8 +15,30 @@ public class Ejercicio1POO {
         ArrayList<Cliente> clientesBanco = new ArrayList<>();
         clientesBanco.add(clienteA);
         clientesBanco.add(clienteB);
+        
+        // Crear el banco y agregar clientes
         Banco banco = new Banco("Bcol", domicilio, "444", clientesBanco);
         
+        // Crear cuentas
+        Cuenta cuentaAhorro = new CuentaAhorro(1, 5000.0, 2.5);
+        Cuenta cuentaCheque = new CuentaCheque(2, 1000.0, 20.0);
         
+        // Abrir cuentas en el banco
+        banco.abrirCuenta(cuentaAhorro);
+        banco.abrirCuenta(cuentaCheque);
+        
+        // Obtener y mostrar una cuenta
+        Cuenta cuentaObtenida = banco.obtenerCuenta(1);
+        System.out.println("Cuenta obtenida: " + cuentaObtenida);
+        
+        // Cerrar una cuenta
+        banco.cerrarCuenta(2);
+        
+        // Mostrar clientes y cuentas
+        System.out.println("Clientes del banco: " + banco.getClientes());
+        System.out.println("Cuentas del banco: " + banco.getClientes());
+        
+        // Mostrar banco
+        System.out.println(banco);
     }
 }
